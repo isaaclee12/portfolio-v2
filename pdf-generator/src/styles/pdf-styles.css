@@ -1,0 +1,20 @@
+/* PDF-specific styles */
+.resume-container {
+    /* Styles for PDF layout */
+    /* Implementation to be added */
+}
+
+/* Typography */
+h1, h2, h3 {
+    /* Heading styles */
+}
+
+/* Layout */
+.section {
+    /* Section styles */
+}
+
+/* Print-specific styles */
+@media print {
+    /* Print optimizations */
+}

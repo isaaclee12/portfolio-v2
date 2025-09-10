@@ -1,0 +1,39 @@
+{
+  "personal": {
+    "name": "Your Name",
+    "title": "Software Engineer",
+    "email": "your.email@example.com",
+    "location": "Your Location",
+    "summary": "Brief professional summary to be filled in"
+  },
+  "projects": [
+    {
+      "id": "project-1",
+      "name": "Sample Project",
+      "description": "Project description to be filled in",
+      "technologies": ["React", "TypeScript", "Tailwind CSS"],
+      "liveUrl": "https://example.com",
+      "githubUrl": "https://github.com/username/repo",
+      "imageUrl": "path/to/image.png",
+      "highlights": [
+        "Key achievement 1",
+        "Key achievement 2"
+      ],
+      "category": "professional"
+    }
+  ],
+  "techStack": [
+    {
+      "category": "Frontend",
+      "technologies": ["React", "TypeScript", "HTML", "CSS", "JavaScript"]
+    },
+    {
+      "category": "Backend",
+      "technologies": ["Node.js", "Python", "Express"]
+    },
+    {
+      "category": "Tools & Technologies",
+      "technologies": ["Git", "Docker", "AWS"]
+    }
+  ]
+}

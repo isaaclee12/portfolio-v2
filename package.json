@@ -1,0 +1,17 @@
+{
+  "name": "portfolio-v2",
+  "version": "1.0.0",
+  "description": "Portfolio website with PDF generation capability",
+  "private": true,
+  "scripts": {
+    "dev": "cd portfolio-website && npm run dev",
+    "pdf": "cd pdf-generator && npm run generate"
+  },
+  "workspaces": [
+    "portfolio-website",
+    "pdf-generator"
+  ],
+  "keywords": ["portfolio", "react", "typescript", "pdf", "puppeteer"],
+  "author": "",
+  "license": "ISC"
+}
