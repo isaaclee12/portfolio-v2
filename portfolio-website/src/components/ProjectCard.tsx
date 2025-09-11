@@ -1,8 +1,8 @@
 import React from 'react';
-import type { Project } from '../types/portfolio';
+import type { CoolProject } from '../types/portfolio';
 
 interface ProjectCardProps {
-  project: Project;
+  project: CoolProject;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = () => {

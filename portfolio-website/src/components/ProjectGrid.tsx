@@ -1,8 +1,8 @@
 import React from 'react';
-import type { Project } from '../types/portfolio';
+import type { CoolProject } from '../types/portfolio';
 
 interface ProjectGridProps {
-  projects: Project[];
+  projects: CoolProject[];
 }
 
 const ProjectGrid: React.FC<ProjectGridProps> = () => {

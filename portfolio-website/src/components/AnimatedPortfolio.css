@@ -1,0 +1,570 @@
+/* =======================
+   PERFORMANCE OPTIMIZATIONS
+   ======================= */
+.animated-portfolio {
+  contain: layout style paint;
+  transform: translateZ(0); /* Create stacking context for GPU acceleration */
+}
+
+.animated-portfolio * {
+  box-sizing: border-box;
+}
+
+/* Elements that will animate get will-change during transitions */
+.animated-portfolio.phase1 *,
+.animated-portfolio.phase2 *,
+.animated-portfolio.phase3 *,
+.animated-portfolio.phase4 * {
+  will-change: transform, opacity;
+}
+
+.animated-portfolio.complete * {
+  will-change: auto; /* Remove will-change after animations complete */
+}
+
+/* =======================
+   BASIC STATE (Plain HTML)
+   ======================= */
+.animated-portfolio.basic {
+  font-family: 'Times New Roman', serif;
+  line-height: 1.6;
+  color: #000;
+  background: #fff;
+  padding: 40px;
+  max-width: none;
+  margin: 0;
+}
+
+.animated-portfolio.basic * {
+  transition: none; /* No transitions in basic state */
+}
+
+.animated-portfolio.basic .portfolio-background {
+  display: none;
+}
+
+.animated-portfolio.basic .portfolio-nav {
+  display: none;
+}
+
+.animated-portfolio.basic .portfolio-title {
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0 0 10px 0;
+  text-align: left;
+}
+
+.animated-portfolio.basic .portfolio-subtitle {
+  font-size: 16px;
+  font-style: italic;
+  margin: 0 0 20px 0;
+}
+
+.animated-portfolio.basic .hero-content,
+.animated-portfolio.basic .section-title {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 20px 0 10px 0;
+}
+
+.animated-portfolio.basic .experience-card,
+.animated-portfolio.basic .project-card,
+.animated-portfolio.basic .skill-category {
+  margin: 20px 0;
+  padding: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+
+.animated-portfolio.basic .company-name,
+.animated-portfolio.basic .project-name,
+.animated-portfolio.basic .category-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.animated-portfolio.basic .tech-tag,
+.animated-portfolio.basic .skill-tag {
+  display: inline;
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+.animated-portfolio.basic .tech-tag::after,
+.animated-portfolio.basic .skill-tag::after {
+  content: ', ';
+}
+
+.animated-portfolio.basic .tech-tag:last-child::after,
+.animated-portfolio.basic .skill-tag:last-child::after {
+  content: '';
+}
+
+/* Skip and Transform buttons */
+.skip-animation-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skip-animation-btn:hover {
+  background: #e0e0e0;
+}
+
+.transform-trigger {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.transform-btn {
+  font-size: 18px;
+  padding: 15px 30px;
+  background: #007acc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.transform-btn:hover {
+  background: #005a9e;
+}
+
+.transform-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* =======================
+   ANIMATION TRANSITIONS
+   ======================= */
+.animated-portfolio:not(.basic) * {
+  transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.animated-portfolio:not(.basic) .tech-tag,
+.animated-portfolio:not(.basic) .skill-tag {
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* =======================
+   PHASE 1: Background & Typography
+   ======================= */
+.animated-portfolio.phase1,
+.animated-portfolio.phase2,
+.animated-portfolio.phase3,
+.animated-portfolio.phase4,
+.animated-portfolio.complete {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color: #1a202c;
+  background: transparent;
+  padding: 0;
+  min-height: 100vh;
+  position: relative;
+}
+
+.portfolio-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: scale(1.1);
+}
+
+.animated-portfolio.phase1 .portfolio-background,
+.animated-portfolio.phase2 .portfolio-background,
+.animated-portfolio.phase3 .portfolio-background,
+.animated-portfolio.phase4 .portfolio-background,
+.animated-portfolio.complete .portfolio-background {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* =======================
+   PHASE 2: Navigation & Header
+   ======================= */
+.portfolio-header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  transform: translateY(-50px);
+  opacity: 0;
+}
+
+.animated-portfolio.phase2 .portfolio-header,
+.animated-portfolio.phase3 .portfolio-header,
+.animated-portfolio.phase4 .portfolio-header,
+.animated-portfolio.complete .portfolio-header {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.portfolio-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.portfolio-subtitle {
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 40px 0;
+  font-weight: 300;
+}
+
+.portfolio-nav {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.animated-portfolio.phase2 .portfolio-nav,
+.animated-portfolio.phase3 .portfolio-nav,
+.animated-portfolio.phase4 .portfolio-nav,
+.animated-portfolio.complete .portfolio-nav {
+  transform: translateY(0);
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* =======================
+   PHASE 3: Content & Cards
+   ======================= */
+.portfolio-hero {
+  background: rgba(255, 255, 255, 0.95);
+  margin: 0 20px 40px;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  transform: scale(0.8) translateY(30px);
+  opacity: 0;
+  backdrop-filter: blur(10px);
+}
+
+.animated-portfolio.phase3 .portfolio-hero,
+.animated-portfolio.phase4 .portfolio-hero,
+.animated-portfolio.complete .portfolio-hero {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.hero-summary {
+  font-size: 18px;
+  color: #4a5568;
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+}
+
+.hero-contact {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.contact-item {
+  color: #718096;
+  font-size: 14px;
+}
+
+.portfolio-section {
+  margin: 0 20px 60px;
+  transform: translateY(40px);
+  opacity: 0;
+}
+
+.animated-portfolio.phase3 .portfolio-section,
+.animated-portfolio.phase4 .portfolio-section,
+.animated-portfolio.complete .portfolio-section {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin: 0 0 40px 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* =======================
+   PHASE 4: Grid Layout
+   ======================= */
+.experience-grid,
+.projects-grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr;
+}
+
+.animated-portfolio.phase4 .experience-grid,
+.animated-portfolio.complete .experience-grid,
+.animated-portfolio.phase4 .projects-grid,
+.animated-portfolio.complete .projects-grid {
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.skills-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+.animated-portfolio.phase4 .skills-grid,
+.animated-portfolio.complete .skills-grid {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.experience-card,
+.project-card,
+.skill-category {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  transform: scale(0.9) rotate(-1deg);
+  opacity: 0.8;
+  transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.animated-portfolio.phase4 .experience-card,
+.animated-portfolio.complete .experience-card,
+.animated-portfolio.phase4 .project-card,
+.animated-portfolio.complete .project-card,
+.animated-portfolio.phase4 .skill-category,
+.animated-portfolio.complete .skill-category {
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+/* Stagger the card animations */
+.experience-card:nth-child(2n) { transition-delay: 0.1s; }
+.experience-card:nth-child(3n) { transition-delay: 0.2s; }
+.project-card:nth-child(2n) { transition-delay: 0.15s; }
+.skill-category:nth-child(2n) { transition-delay: 0.1s; }
+
+.company-name,
+.project-name,
+.category-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 8px 0;
+}
+
+.department,
+.job-title {
+  color: #718096;
+  font-size: 14px;
+  margin: 0 0 5px 0;
+}
+
+.dates {
+  color: #a0aec0;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 0 20px 0;
+}
+
+.achievements-list,
+.highlights-list {
+  margin: 20px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.achievement-item,
+.highlight-item {
+  margin: 0 0 12px 0;
+  padding-left: 20px;
+  position: relative;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.achievement-item::before,
+.highlight-item::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+}
+
+.project-description,
+.project-backstory {
+  color: #4a5568;
+  line-height: 1.6;
+  margin: 15px 0;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 6px 12px;
+  border: 1px solid #667eea;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.project-link:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* =======================
+   PHASE 5: Interactive Elements
+   ======================= */
+.tech-stack,
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.tech-tag,
+.skill-tag {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.animated-portfolio.complete .tech-tag,
+.animated-portfolio.complete .skill-tag {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.tech-tag:nth-child(odd) { transition-delay: 0.05s; }
+.tech-tag:nth-child(even) { transition-delay: 0.1s; }
+.skill-tag:nth-child(odd) { transition-delay: 0.05s; }
+.skill-tag:nth-child(even) { transition-delay: 0.1s; }
+
+.animated-portfolio.complete .tech-tag:hover,
+.animated-portfolio.complete .skill-tag:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.animated-portfolio.complete .experience-card:hover,
+.animated-portfolio.complete .project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* =======================
+   RESPONSIVE DESIGN
+   ======================= */
+@media (max-width: 768px) {
+  .animated-portfolio.basic {
+    padding: 20px;
+  }
+  
+  .portfolio-hero {
+    margin: 0 10px 30px;
+    padding: 30px 20px;
+  }
+  
+  .portfolio-section {
+    margin: 0 10px 40px;
+  }
+  
+  .experience-card,
+  .project-card,
+  .skill-category {
+    padding: 20px;
+  }
+  
+  .portfolio-nav {
+    gap: 20px;
+  }
+  
+  .hero-contact {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .project-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* =======================
+   REDUCED MOTION SUPPORT
+   ======================= */
+@media (prefers-reduced-motion: reduce) {
+  .animated-portfolio *,
+  .animated-portfolio *::before,
+  .animated-portfolio *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animated-portfolio.complete * {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
