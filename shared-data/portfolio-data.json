@@ -6,20 +6,129 @@
     "location": "Your Location",
     "summary": "Brief professional summary to be filled in"
   },
-  "projects": [
+  "professionalExperience": [
     {
-      "id": "project-1",
-      "name": "Sample Project",
-      "description": "Project description to be filled in",
-      "technologies": ["React", "TypeScript", "Tailwind CSS"],
-      "liveUrl": "https://example.com",
-      "githubUrl": "https://github.com/username/repo",
-      "imageUrl": "path/to/image.png",
-      "highlights": [
-        "Key achievement 1",
-        "Key achievement 2"
+      "company": "2U",
+      "subsidiary_or_department": "edX, Learning & Pedagogy Team",
+      "titles_held": ["Software Engineer"],
+      "dates_worked": ["February 2023", "September 2023"],
+      "relevant_urls": [
+        "https://2u.com/about/mission/",
+        "https://www.edx.org/",
+        "https://press.edx.org/edx-debuts-two-ai-powered-learning-assistants-built-on-chatgpt"
       ],
-      "category": "professional"
+      "achievements": [
+        "Pitched, designed, and developed applications increasing headline KPI by 50% through data-driven insights",
+        "Wrangled and analyzed user data to develop AI-powered learning assistant using OpenAI integration",
+        "Collaborated across teams shipping code that scaled applications for thousands of students globally",
+        "Interviewed stakeholders and examined system patterns leading overseas engineering migration project",
+        "Monitored systems and resolved production issues affecting hundreds of users with real-world impact"
+      ],
+      "technologies": [
+        "Node.js",
+        "JavaScript",
+        "React",
+        "Python",
+        "PostgreSQL",
+        "OpenAI",
+        "AWS"
+      ]
+    },
+    {
+      "company": "University of Vermont",
+      "subsidiary_or_department": "Larner College of Medicine",
+      "titles_held": ["Software Engineer"],
+      "dates_worked": ["September 2021", "April 2022"],
+      "relevant_urls": ["https://www.uvm.edu/larnermed"],
+      "achievements": [
+        "Collaborated with medical professionals to wrangle data for opioid treatment educational software",
+        "Refactored and analyzed legacy code eliminating bugs, improving performance by 200% in 4 weeks",
+        "Designed robust software solution enhancing engagement for hundreds of medical students"
+      ],
+      "technologies": ["JavaScript", "Node.js", "Articulate 360"]
+    },
+    {
+      "company": "University of Vermont",
+      "subsidiary_or_department": "Statistics and Data Science Department",
+      "titles_held": ["Software Engineer"],
+      "dates_worked": ["April 2021", "December 2021"],
+      "relevant_urls": ["https://www.uvm.edu/cems/mathstat"],
+      "achievements": [
+        "Redesigned and revamped department website improving user experience and accessibility",
+        "Coded and tested features examining scalability"
+      ],
+      "technologies": ["React", "JavaScript", "Python"]
+    }
+  ],
+  "coolProjects": [
+    {
+      "name": "NYC Climate Efficiency Map",
+      "description": "Interactive web application visualizing NYC building energy efficiency data at unprecedented scale, making government climate disclosure data accessible for public accountability and investigative analysis.",
+      "backstory": "I conceived and developed this project from inception to production deployment, tackling the massive technical challenge of rendering 61,588 individual building markers without freezing browsers. Using Python and GeoPandas, I built a data pipeline to process and spatially join three NYC government datasets, then created a React/TypeScript frontend with innovative viewport filtering and zoom-based architecture that achieved 99% memory reduction. The result is a production tool that reveals geographic patterns in energy efficiency perfect for investigative journalism, while serving as a genuine public utility for residents and policymakers to understand climate accountability in their neighborhoods.",
+      "live_url": "https://nyc-climate-efficiency-map.vercel.app/",
+      "image": "screenshots/nyc-climate-map.png",
+      "highlights": [
+        "61,588 building markers with 99% memory optimization through viewport filtering",
+        "Multi-source government data integration and spatial analysis pipeline",
+        "Production deployment serving real public utility for climate accountability",
+        "Zoom-based dual-scale architecture revealing city-wide and building-level patterns"
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Python",
+        "GeoPandas",
+        "Leaflet",
+        "Vite",
+        "Tailwind CSS"
+      ]
+    }
+  ],
+  "oldProjects": [
+    {
+      "title": "UDP Linux Server Client",
+      "description": "A program created to allow communication between two Linux VMs",
+      "url": "https://github.com/isaaclee12/UDP_Linux_Server_Client"
+    },
+    {
+      "title": "UVM Statistics and Data Science Club Website",
+      "description": "A revamp for the UVM Statistics and Data Science Club's website. Built using a Django framework, Python, Bootstrap, SQLite3, and Shell.",
+      "url": "https://github.com/isaaclee12/statistics-and-data-science-club-v2"
+    },
+    {
+      "title": "Using RL to Maximize Social Media Engagement",
+      "description": "A reinforcement learning agent that utilizes tweepy and a multi-armed bandits agent to maximize engagement on Twitter via likes, retweets, and follows.",
+      "url": "https://github.com/isaaclee12/rl-social-media-engagment"
+    },
+    {
+      "title": "Racial Disparities in Police Killings by US State",
+      "description": "2nd Place Winner for Advanced App Projects in the UVM CS Fair, An interactive map that shows the disparity between state demographics and police killings.",
+      "url": "https://github.com/isaaclee12/racial-disparities-in-police-killings-by-state"
+    },
+    {
+      "title": "Leap Motion Element Game",
+      "description": "An in-browser Leap Motion game that simulates the “bending” of the four elements (similar to the Avatar: The Last Airbender series).",
+      "url": "https://github.com/isaaclee12/Leap_Motion_Element_Game"
+    },
+    {
+      "title": "Symmetric Cryptographer",
+      "description": "A C++ program that can encrypt and decrypt a string using a public key-based algorithm.",
+      "url": "https://github.com/isaaclee12/Cryptographer"
+    },
+    {
+      "title": "Food Role Playing Game",
+      "description": "A turn-based combat game made in C++.",
+      "url": "https://github.com/isaaclee12/Food-Role-Playing-Game"
+    },
+    {
+      "title": "Data Cleaning Lesson",
+      "description": "A program used to teach others how to use python to clean data.",
+      "url": "https://github.com/isaaclee12/DataCleaningLesson"
+    },
+    {
+      "title": "Schedule Compiler",
+      "description": "Compiles user’s schedules to see what meeting time works best for everyone.",
+      "url": "https://github.com/isaaclee12/Schedule-Compiler"
     }
   ],
   "techStack": [

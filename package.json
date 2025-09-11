@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Portfolio website with PDF generation capability",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "cd portfolio-website && npm run dev",
     "pdf": "cd pdf-generator && npm run generate"

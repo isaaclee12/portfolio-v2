@@ -1,13 +1,27 @@
-export interface Project {
-  id: string;
+export interface ProfessionalExperience {
+  company: string;
+  subsidiary_or_department?: string;
+  titles_held: string[];
+  dates_worked: string[];
+  relevant_urls: string[];
+  achievements: string[];
+  technologies: string[];
+}
+
+export interface CoolProject {
   name: string;
   description: string;
-  technologies: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-  imageUrl?: string;
+  backstory?: string;
+  live_url?: string;
+  image?: string;
   highlights?: string[];
-  category: 'professional' | 'personal';
+  technologies: string[];
+}
+
+export interface OldProject {
+  title: string;
+  description: string;
+  url?: string;
 }
 
 export interface TechStack {
@@ -25,6 +39,8 @@ export interface PersonalInfo {
 
 export interface PortfolioData {
   personal: PersonalInfo;
-  projects: Project[];
+  professionalExperience: ProfessionalExperience[];
+  coolProjects: CoolProject[];
+  oldProjects: OldProject[];
   techStack: TechStack[];
 }
