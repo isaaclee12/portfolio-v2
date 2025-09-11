@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import type { PortfolioData } from '../../../shared-data/types';
+import React, { useState, useEffect, useRef } from 'react';
+import type { 
+  PortfolioData, 
+  ProfessionalExperience, 
+  CoolProject, 
+  TechStack 
+} from '../../../shared-data/types';
 import portfolioData from '../../../shared-data/portfolio-data.json';
 import './AnimatedPortfolio.css';
-
-type AnimationPhase = 'basic' | 'phase1' | 'phase2' | 'phase3' | 'phase4' | 'complete';
 
 interface AnimatedPortfolioProps {
   data?: PortfolioData;
@@ -12,58 +15,44 @@ interface AnimatedPortfolioProps {
 const AnimatedPortfolio: React.FC<AnimatedPortfolioProps> = ({ 
   data = portfolioData as PortfolioData 
 }) => {
-  const [animationPhase, setAnimationPhase] = useState<AnimationPhase>('basic');
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [showSkipButton, setShowSkipButton] = useState(false);
+  const [isTransformed, setIsTransformed] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Check for reduced motion preference
   const respectsReducedMotion = typeof window !== 'undefined' && 
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  useEffect(() => {
-    // Show skip button after component mounts
-    setShowSkipButton(true);
-  }, []);
-
-  const triggerTransformation = () => {
+  const triggerTransformation = async () => {
     if (respectsReducedMotion) {
-      // Instant transformation for reduced motion
-      setAnimationPhase('complete');
+      setIsTransformed(true);
       return;
     }
 
-    setIsTransitioning(true);
+    setIsAnimating(true);
     
-    // Staggered phase transitions
-    const phaseTimings = [
-      { phase: 'phase1' as AnimationPhase, delay: 0 },
-      { phase: 'phase2' as AnimationPhase, delay: 200 },
-      { phase: 'phase3' as AnimationPhase, delay: 400 },
-      { phase: 'phase4' as AnimationPhase, delay: 800 },
-      { phase: 'complete' as AnimationPhase, delay: 1800 }
-    ];
-
-    phaseTimings.forEach(({ phase, delay }) => {
+    // FLIP Animation technique will be implemented here
+    // For now, simple state change
+    setTimeout(() => {
+      setIsTransformed(true);
       setTimeout(() => {
-        setAnimationPhase(phase);
-        if (phase === 'complete') {
-          setIsTransitioning(false);
-        }
-      }, delay);
-    });
+        setIsAnimating(false);
+      }, 2000);
+    }, 100);
   };
 
   const skipAnimation = () => {
-    setAnimationPhase('complete');
-    setIsTransitioning(false);
+    setIsTransformed(true);
+    setIsAnimating(false);
   };
 
-  const baseClasses = `animated-portfolio ${animationPhase}`;
-
   return (
-    <div className={baseClasses}>
+    <div 
+      ref={containerRef}
+      className={`animated-portfolio-container ${isTransformed ? 'transformed' : 'basic'} ${isAnimating ? 'animating' : ''}`}
+    >
       {/* Skip Animation Button */}
-      {showSkipButton && animationPhase === 'basic' && (
+      {!isTransformed && (
         <button 
           className="skip-animation-btn"
           onClick={skipAnimation}
@@ -74,135 +63,121 @@ const AnimatedPortfolio: React.FC<AnimatedPortfolioProps> = ({
       )}
 
       {/* Main Transform Button */}
-      {animationPhase === 'basic' && (
+      {!isTransformed && (
         <div className="transform-trigger">
           <button 
             className="transform-btn"
             onClick={triggerTransformation}
-            disabled={isTransitioning}
+            disabled={isAnimating}
           >
             Click me to improve this Portfolio!
           </button>
         </div>
       )}
 
-      {/* Background */}
-      <div className="portfolio-background"></div>
-
-      {/* Header Section */}
-      <header className="portfolio-header">
-        <h1 className="portfolio-title">{data.personal.name}</h1>
-        <p className="portfolio-subtitle">{data.personal.title}</p>
+      {/* Original Plain HTML Structure */}
+      <div className="portfolio-content">
+        <h1 className="main-title">{data.personal.name}</h1>
+        <p className="main-subtitle">{data.personal.title}</p>
         
-        {/* Navigation */}
-        <nav className="portfolio-nav">
-          <a href="#experience" className="nav-link">Experience</a>
-          <a href="#projects" className="nav-link">Projects</a>
-          <a href="#skills" className="nav-link">Skills</a>
-          <a href="#contact" className="nav-link">Contact</a>
-        </nav>
-      </header>
-
-      {/* Hero Section */}
-      <section className="portfolio-hero">
-        <div className="hero-content">
-          <p className="hero-summary">{data.personal.summary}</p>
-          <div className="hero-contact">
-            <span className="contact-item">{data.personal.email}</span>
-            <span className="contact-item">{data.personal.location}</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Professional Experience */}
-      <section className="portfolio-section" id="experience">
-        <h2 className="section-title">Professional Experience</h2>
-        <div className="experience-grid">
-          {data.professionalExperience.map((exp, index) => (
-            <article key={index} className="experience-card">
-              <div className="card-header">
-                <h3 className="company-name">{exp.company}</h3>
-                {exp.subsidiary_or_department && (
-                  <p className="department">{exp.subsidiary_or_department}</p>
-                )}
+        {/* Resume Section - Original Structure */}
+        <div className="resume-section">
+          <h2 className="section-heading">Resume</h2>
+          {data.professionalExperience.map((exp: ProfessionalExperience, index: number) => (
+            <div key={index} className="experience-item">
+              <div className="company-info">
+                {exp.company}, {exp.subsidiary_or_department}
               </div>
+              <div className="job-info">{exp.titles_held.join(', ')}</div>
+              <div className="date-info">{exp.dates_worked[0]} - {exp.dates_worked[1]}</div>
               
-              <div className="card-meta">
-                <p className="job-title">{exp.titles_held.join(', ')}</p>
-                <p className="dates">{exp.dates_worked[0]} - {exp.dates_worked[1]}</p>
-              </div>
-
-              <ul className="achievements-list">
-                {exp.achievements.map((achievement, idx) => (
-                  <li key={idx} className="achievement-item">{achievement}</li>
-                ))}
-              </ul>
-
-              <div className="tech-stack">
-                {exp.technologies.map((tech, idx) => (
-                  <span key={idx} className="tech-tag">{tech}</span>
-                ))}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured Projects */}
-      <section className="portfolio-section" id="projects">
-        <h2 className="section-title">Featured Projects</h2>
-        <div className="projects-grid">
-          {data.coolProjects.map((project, index) => (
-            <article key={index} className="project-card">
-              <div className="project-header">
-                <h3 className="project-name">{project.name}</h3>
-                {project.live_url && (
-                  <a href={project.live_url} className="project-link" target="_blank" rel="noopener noreferrer">
-                    View Live
-                  </a>
-                )}
-              </div>
-
-              <p className="project-description">{project.description}</p>
-              
-              {project.backstory && (
-                <p className="project-backstory">{project.backstory}</p>
-              )}
-
-              {project.highlights && (
-                <ul className="highlights-list">
-                  {project.highlights.map((highlight, idx) => (
-                    <li key={idx} className="highlight-item">{highlight}</li>
+              <div className="urls-section">
+                <p>Relevant URLs:</p>
+                <ul className="urls-list">
+                  {exp.relevant_urls.map((url: string, idx: number) => (
+                    <li key={idx} className="url-item">
+                      <a href={url} className="url-link">{url}</a>
+                    </li>
                   ))}
                 </ul>
-              )}
-
-              <div className="tech-stack">
-                {project.technologies.map((tech, idx) => (
-                  <span key={idx} className="tech-tag">{tech}</span>
-                ))}
               </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* Tech Stack */}
-      <section className="portfolio-section" id="skills">
-        <h2 className="section-title">Technical Skills</h2>
-        <div className="skills-grid">
-          {data.techStack.map((category, index) => (
-            <div key={index} className="skill-category">
-              <h3 className="category-title">{category.category}</h3>
-              <div className="skills-list">
-                {category.technologies.map((tech, idx) => (
-                  <span key={idx} className="skill-tag">{tech}</span>
-                ))}
+              
+              <div className="achievements-section">
+                <p>Achievements:</p>
+                <ul className="achievements-list">
+                  {exp.achievements.map((achievement: string, idx: number) => (
+                    <li key={idx} className="achievement-item">
+                      {achievement}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="tech-section">
+                <p>Technologies Used:</p>
+                <ul className="tech-list">
+                  {exp.technologies.map((technology: string, idx: number) => (
+                    <li key={idx} className="tech-item">
+                      {technology}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}
         </div>
-      </section>
+
+        {/* Featured Projects Section - Original Structure */}
+        <div className="projects-section">
+          <h2 className="section-heading">Featured Projects</h2>
+          {data.coolProjects.map((project: CoolProject, index: number) => (
+            <div key={index} className="project-item">
+              <h3 className="project-title">{project.name}</h3>
+              <div className="project-description">{project.description}</div>
+              <div className="project-backstory">{project.backstory}</div>
+              {project.live_url && (
+                <a href={project.live_url} className="project-url">{project.live_url}</a>
+              )}
+              {project.image && (
+                <div className="project-image-path">{project.image}</div>
+              )}
+              
+              <div className="highlights-section">
+                <p>Highlights:</p>
+                <ul className="highlights-list">
+                  {project.highlights?.map((highlight: string, idx: number) => (
+                    <li key={idx} className="highlight-item">{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="project-tech-section">
+                <p>Technologies Used:</p>
+                <ul className="project-tech-list">
+                  {project.technologies.map((technology: string, idx: number) => (
+                    <li key={idx} className="project-tech-item">{technology}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tech Stack Section - Original Structure */}
+        <div className="skills-section">
+          <h2 className="section-heading">Technical Skills</h2>
+          {data.techStack.map((category: TechStack, index: number) => (
+            <div key={index} className="skill-category">
+              <h3 className="skill-category-title">{category.category}</h3>
+              <ul className="skill-list">
+                {category.technologies.map((tech: string, idx: number) => (
+                  <li key={idx} className="skill-item">{tech}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
