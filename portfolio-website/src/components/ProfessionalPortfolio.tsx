@@ -62,16 +62,21 @@ const ProfessionalPortfolio: React.FC = () => {
       {/* Navigation Sidebar */}
       <nav className="nav-sidebar">
         <div className="nav-progress">
-          {sections.map((section) => (
-            <div
-              key={section.id}
-              className={`nav-item ${activeSection === section.id ? 'active' : ''}`}
-              onClick={() => scrollToSection(section.id)}
-            >
-              <div className="nav-dot"></div>
-              <span className="nav-label">{section.title}</span>
-            </div>
-          ))}
+          {sections.map((section, index) => {
+            const icons = ['🏠', '👤', '💼', '🚀', '🧠', '📧'];
+            return (
+              <div
+                key={section.id}
+                className={`nav-item ${activeSection === section.id ? 'active' : ''}`}
+                onClick={() => scrollToSection(section.id)}
+              >
+                <div className="nav-dot">
+                  <span>{icons[index]}</span>
+                </div>
+                <span className="nav-label">{section.title}</span>
+              </div>
+            );
+          })}
         </div>
       </nav>
 
