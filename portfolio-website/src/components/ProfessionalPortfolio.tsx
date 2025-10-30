@@ -95,8 +95,7 @@ const ProfessionalPortfolio: React.FC = () => {
           </div>
           <div className="hero-content slide-in-left">
             <h1 className="hero-title">
-              <span className="title-line">Isaac</span>
-              <span className="title-line">Lee</span>
+              <span className="title-line">Isaac Lee</span>
             </h1>
             <p className="hero-subtitle slide-in-left delay-200">
               {data.personal.title}

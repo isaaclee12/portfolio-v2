@@ -918,7 +918,7 @@ body {
   .main-content {
     margin-left: 0;
   }
-  
+
   .nav-sidebar {
     width: 100%;
     height: 60px;
@@ -926,42 +926,86 @@ body {
     top: auto;
     flex-direction: row;
   }
-  
+
   .nav-progress {
     flex-direction: row;
     gap: 1.5rem;
   }
-  
+
   .nav-label {
     display: none;
   }
-  
+
   .section {
-    padding: 0 20px;
+    padding: 2rem 20px;
     min-height: calc(100vh - 60px);
   }
-  
+
   .section-title {
     font-size: 2.5rem;
   }
-  
+
   .hero-content,
   .hero-image {
     flex: 1;
     max-width: none;
     margin: 0;
   }
-  
-  .hero-section .section-content {
+
+  .hero-section {
     flex-direction: column;
-    text-align: center;
-    gap: 2rem;
   }
-  
+
+  .hero-section .hero-content {
+    order: 2;
+    text-align: center;
+  }
+
+  .hero-section .hero-image {
+    order: 1;
+  }
+
+  .hero-title {
+    margin-top: 40px;
+  }
+
+  .title-line {
+    display: inline;
+  }
+
+  .profile-card {
+    padding: 2rem;
+  }
+
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    font-size: 2.5rem;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .profile-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .profile-info p {
+    font-size: 1rem;
+  }
+
+  .skills-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .social-links {
+    bottom: 80px;
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .tech-badges {
     gap: 0.75rem;
   }
@@ -969,7 +1013,7 @@ body {
   .tech-badge {
     padding: 0.6rem 1.2rem;
   }
-  
+
   .cta-button {
     width: 100%;
   }
@@ -977,17 +1021,26 @@ body {
 
 @media (max-width: 480px) {
   .section {
-    padding: 0 15px;
+    padding: 1.5rem 15px;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
+  .profile-card {
+    padding: 1.5rem;
+  }
+
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .experience-card,
   .project-content,
   .skill-category {
