@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-import type { PortfolioData } from '../../../shared-data/types';
-import portfolioData from '../../../shared-data/portfolio-data.json';
-import './ProfessionalPortfolio.css';
-
+import React, { useState, useEffect, useRef } from "react";
+import type { PortfolioData } from "../../../shared-data/types";
+import portfolioData from "../../../shared-data/portfolio-data.json";
+import "./ProfessionalPortfolio.css";
 
 const ProfessionalPortfolio: React.FC = () => {
   const data = portfolioData as PortfolioData;
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState("hero");
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   const heroRef = useRef<HTMLElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const experienceRef = useRef<HTMLElement>(null);
@@ -17,12 +16,12 @@ const ProfessionalPortfolio: React.FC = () => {
   const contactRef = useRef<HTMLElement>(null);
 
   const sections = [
-    { id: 'hero', ref: heroRef, title: 'Home' },
-    { id: 'about', ref: aboutRef, title: 'About' },
-    { id: 'experience', ref: experienceRef, title: 'Experience' },
-    { id: 'projects', ref: projectsRef, title: 'Projects' },
-    { id: 'skills', ref: skillsRef, title: 'Skills' },
-    { id: 'contact', ref: contactRef, title: 'Contact' }
+    { id: "hero", ref: heroRef, title: "Home" },
+    { id: "about", ref: aboutRef, title: "About" },
+    { id: "experience", ref: experienceRef, title: "Experience" },
+    { id: "projects", ref: projectsRef, title: "Projects" },
+    { id: "skills", ref: skillsRef, title: "Skills" },
+    { id: "contact", ref: contactRef, title: "Contact" },
   ];
 
   useEffect(() => {
@@ -51,23 +50,25 @@ const ProfessionalPortfolio: React.FC = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const section = sections.find(s => s.id === sectionId);
+    const section = sections.find((s) => s.id === sectionId);
     if (section?.ref.current) {
-      section.ref.current.scrollIntoView({ behavior: 'smooth' });
+      section.ref.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <div className={`portfolio ${isLoaded ? 'loaded' : ''}`}>
+    <div className={`portfolio ${isLoaded ? "loaded" : ""}`}>
       {/* Navigation Sidebar */}
       <nav className="nav-sidebar">
         <div className="nav-progress">
           {sections.map((section, index) => {
-            const icons = ['🏠', '👤', '💼', '🚀', '🧠', '📧'];
+            const icons = ["🏠", "👤", "💼", "🚀", "🧠", "📧"];
             return (
               <div
                 key={section.id}
-                className={`nav-item ${activeSection === section.id ? 'active' : ''}`}
+                className={`nav-item ${
+                  activeSection === section.id ? "active" : ""
+                }`}
                 onClick={() => scrollToSection(section.id)}
               >
                 <div className="nav-dot">
@@ -97,18 +98,18 @@ const ProfessionalPortfolio: React.FC = () => {
               {data.personal.title}
             </p>
             <p className="hero-description slide-in-left delay-400">
-              {data.personal.summary}
+              {data.personal.description}
             </p>
             <div className="hero-cta slide-in-left delay-600">
-              <button 
+              <button
                 className="cta-button primary"
-                onClick={() => scrollToSection('projects')}
+                onClick={() => scrollToSection("projects")}
               >
                 View My Work
               </button>
-              <button 
+              <button
                 className="cta-button secondary"
-                onClick={() => scrollToSection('contact')}
+                onClick={() => scrollToSection("contact")}
               >
                 Get In Touch
               </button>
@@ -117,7 +118,7 @@ const ProfessionalPortfolio: React.FC = () => {
           <div className="hero-image slide-in-right delay-300">
             <div className="profile-card">
               <div className="profile-avatar">
-                <div className="avatar-placeholder">IL</div>
+                <img src="/images/isaac.jpg" alt="Isaac Lee" className="avatar-image" />
               </div>
               <div className="profile-info">
                 <h3>Available for hire</h3>
@@ -135,61 +136,69 @@ const ProfessionalPortfolio: React.FC = () => {
             <div className="about-grid">
               <div className="about-text slide-in-left">
                 <p>
-                  I'm a passionate software engineer with expertise in building scalable web applications 
-                  and data-driven solutions. My experience spans from AI-powered learning platforms to 
-                  interactive data visualizations that serve real public utility.
+                  I'm a passionate software engineer with expertise in building
+                  scalable web applications and data-driven solutions. My
+                  experience spans from AI-powered learning platforms to
+                  interactive data visualizations that serve real public
+                  utility.
                 </p>
                 <p>
-                  I thrive on tackling complex technical challenges, from optimizing performance for 
-                  thousands of users to processing massive datasets with innovative approaches.
+                  I thrive on tackling complex technical challenges, from
+                  optimizing performance for thousands of users to processing
+                  massive datasets with innovative approaches.
                 </p>
-              </div>
-              <div className="about-stats slide-in-right">
-                <div className="stat-item">
-                  <div className="stat-number">3+</div>
-                  <div className="stat-label">Years Experience</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-number">{data.coolProjects.length + data.oldProjects.length}</div>
-                  <div className="stat-label">Projects Completed</div>
-                </div>
-                <div className="stat-item">
-                  <div className="stat-number">{data.professionalExperience.length}</div>
-                  <div className="stat-label">Companies Worked</div>
-                </div>
               </div>
             </div>
           </div>
         </section>
 
         {/* Experience Section */}
-        <section id="experience" ref={experienceRef} className="section experience-section">
+        <section
+          id="experience"
+          ref={experienceRef}
+          className="section experience-section"
+        >
           <div className="section-content">
-            <h2 className="section-title slide-in-up">Professional Experience</h2>
+            <h2 className="section-title slide-in-up">
+              Professional Experience
+            </h2>
             <div className="timeline">
               {data.professionalExperience.map((exp, expIndex) => (
-                <div key={expIndex} className={`timeline-item slide-in-${expIndex % 2 === 0 ? 'left' : 'right'} delay-${expIndex * 200}`}>
+                <div
+                  key={expIndex}
+                  className={`timeline-item slide-in-${
+                    expIndex % 2 === 0 ? "left" : "right"
+                  } delay-${expIndex * 200}`}
+                >
                   <div className="timeline-dot"></div>
                   <div className="timeline-content">
                     <div className="experience-card">
                       <div className="card-header">
                         <h3 className="company">{exp.company}</h3>
-                        <div className="period">{exp.dates_worked[0]} - {exp.dates_worked[1]}</div>
+                        <div className="period">
+                          {exp.dates_worked[0]} - {exp.dates_worked[1]}
+                        </div>
                       </div>
                       {exp.subsidiary_or_department && (
-                        <p className="department">{exp.subsidiary_or_department}</p>
+                        <p className="department">
+                          {exp.subsidiary_or_department}
+                        </p>
                       )}
-                      <div className="role">{exp.titles_held.join(', ')}</div>
-                      
+                      <div className="role">{exp.titles_held.join(", ")}</div>
+
                       <ul className="achievements">
-                        {exp.achievements.slice(0, 3).map((achievement, idx) => (
-                          <li key={idx}>{achievement}</li>
-                        ))}
+                        {exp.achievements
+                          .slice(0, 3)
+                          .map((achievement, idx) => (
+                            <li key={idx}>{achievement}</li>
+                          ))}
                       </ul>
-                      
+
                       <div className="tech-stack">
                         {exp.technologies.map((tech, idx) => (
-                          <span key={idx} className="tech-tag">{tech}</span>
+                          <span key={idx} className="tech-tag">
+                            {tech}
+                          </span>
                         ))}
                       </div>
                     </div>
@@ -201,19 +210,37 @@ const ProfessionalPortfolio: React.FC = () => {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" ref={projectsRef} className="section projects-section">
+        <section
+          id="projects"
+          ref={projectsRef}
+          className="section projects-section"
+        >
           <div className="section-content">
             <h2 className="section-title slide-in-up">Featured Projects</h2>
             <div className="projects-grid">
               {data.coolProjects.map((project, projIndex) => (
-                <div key={projIndex} className={`project-card slide-in-up delay-${projIndex * 200}`}>
+                <div
+                  key={projIndex}
+                  className={`project-card slide-in-up delay-${
+                    projIndex * 200
+                  }`}
+                >
                   <div className="project-image">
+                    <img
+                      src={project.image}
+                      alt="A screenshot of Isaac Lee's New York City Climate Efficiency Map project"
+                    ></img>
                     <div className="image-placeholder">
                       <span>🌟</span>
                     </div>
                     <div className="project-overlay">
                       {project.live_url && (
-                        <a href={project.live_url} target="_blank" rel="noopener noreferrer" className="project-link">
+                        <a
+                          href={project.live_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="project-link"
+                        >
                           View Live
                         </a>
                       )}
@@ -222,18 +249,22 @@ const ProfessionalPortfolio: React.FC = () => {
                   <div className="project-content">
                     <h3 className="project-title">{project.name}</h3>
                     <p className="project-description">{project.description}</p>
-                    
+
                     {project.highlights && (
                       <ul className="project-highlights">
-                        {project.highlights.slice(0, 2).map((highlight, idx) => (
-                          <li key={idx}>{highlight}</li>
-                        ))}
+                        {project.highlights
+                          .slice(0, 2)
+                          .map((highlight, idx) => (
+                            <li key={idx}>{highlight}</li>
+                          ))}
                       </ul>
                     )}
-                    
+
                     <div className="project-tech">
                       {project.technologies.slice(0, 4).map((tech, idx) => (
-                        <span key={idx} className="tech-badge">{tech}</span>
+                        <span key={idx} className="tech-badge">
+                          {tech}
+                        </span>
                       ))}
                     </div>
                   </div>
@@ -247,39 +278,55 @@ const ProfessionalPortfolio: React.FC = () => {
         <section id="skills" ref={skillsRef} className="section skills-section">
           <div className="section-content">
             <h2 className="section-title slide-in-up">Technical Skills</h2>
-            <div className="skills-grid">
-              {data.techStack.map((category, index) => (
-                <div key={index} className={`skill-category slide-in-up delay-${index * 100}`}>
-                  <div className="skill-icon">
-                    <span>{index === 0 ? '🎨' : index === 1 ? '⚙️' : '🔧'}</span>
-                  </div>
-                  <h3 className="skill-title">{category.category}</h3>
-                  <div className="skill-items">
-                    {category.technologies.map((tech, idx) => (
-                      <div key={idx} className="skill-item">
-                        <span className="skill-name">{tech}</span>
-                        <div className="skill-bar">
-                          <div 
-                            className="skill-progress" 
-                            style={{ width: `${85 + Math.random() * 15}%` }}
-                          ></div>
+            <div className="skills-container">
+              {data.techStack.map((category, index) => {
+                const getTechIcon = (tech) => {
+                  const iconMap = {
+                    'React': '⚛️',
+                    'TypeScript': '🟦',
+                    'JavaScript': '🟨',
+                    'HTML': '🧱',
+                    'CSS': '🎨',
+                    'Node.js': '🟢',
+                    'Python': '🐍',
+                    'Express': '🚂',
+                    'Git': '📝',
+                    'Docker': '🐳',
+                    'AWS': '☁️'
+                  };
+                  return iconMap[tech] || '⚙️';
+                };
+
+                return (
+                  <div key={index} className={`skill-category-section slide-in-up delay-${index * 100}`}>
+                    <h3 className="skill-category-title">{category.category}</h3>
+                    <div className="tech-badges">
+                      {category.technologies.map((tech, idx) => (
+                        <div key={idx} className="tech-badge">
+                          <span className="tech-icon">{getTechIcon(tech)}</span>
+                          <span className="tech-name">{tech}</span>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" ref={contactRef} className="section contact-section">
+        <section
+          id="contact"
+          ref={contactRef}
+          className="section contact-section"
+        >
           <div className="section-content">
             <h2 className="section-title slide-in-up">Let's Work Together</h2>
             <div className="contact-content slide-in-up delay-200">
               <p className="contact-intro">
-                Ready to bring your next project to life? Let's discuss how we can work together.
+                Ready to bring your next project to life? Let's discuss how we
+                can work together.
               </p>
               <div className="contact-info">
                 <div className="contact-item">
@@ -292,10 +339,37 @@ const ProfessionalPortfolio: React.FC = () => {
                 </div>
               </div>
               <div className="contact-cta">
-                <a href={`mailto:${data.personal.email}`} className="cta-button primary">
+                <a
+                  href={`mailto:${data.personal.email}`}
+                  className="cta-button primary"
+                >
                   Send Message
                 </a>
               </div>
+            </div>
+            <div className="social-links">
+              <a
+                href={data.personal.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+                aria-label="GitHub"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+              <a
+                href={data.personal.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icon"
+                aria-label="LinkedIn"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </a>
             </div>
           </div>
         </section>

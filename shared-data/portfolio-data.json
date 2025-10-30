@@ -2,8 +2,11 @@
   "personal": {
     "name": "Your Name",
     "title": "Software Engineer",
-    "email": "your.email@example.com",
-    "location": "Your Location",
+    "description": "Software Engineer at 2U. Interested in Impactful Work. Specializing in JavaScript, TypeScript, React, Python, Django, SQL, Git, AWS, and More.",
+    "email": "isaac.wonha.lee@outlook.com",
+    "linkedin": "https://www.linkedin.com/in/isaacleesoftwareengineer",
+    "github": "https://github.com/isaaclee12",
+    "location": "Brooklyn, NY",
     "summary": "Brief professional summary to be filled in"
   },
   "professionalExperience": [
@@ -66,7 +69,7 @@
       "description": "Interactive web application visualizing NYC building energy efficiency data at unprecedented scale, making government climate disclosure data accessible for public accountability and investigative analysis.",
       "backstory": "I conceived and developed this project from inception to production deployment, tackling the massive technical challenge of rendering 61,588 individual building markers without freezing browsers. Using Python and GeoPandas, I built a data pipeline to process and spatially join three NYC government datasets, then created a React/TypeScript frontend with innovative viewport filtering and zoom-based architecture that achieved 99% memory reduction. The result is a production tool that reveals geographic patterns in energy efficiency perfect for investigative journalism, while serving as a genuine public utility for residents and policymakers to understand climate accountability in their neighborhoods.",
       "live_url": "https://nyc-climate-efficiency-map.vercel.app/",
-      "image": "screenshots/nyc-climate-map.png",
+      "image": "/images/nyc-climate-efficiency-map.png",
       "highlights": [
         "61,588 building markers with 99% memory optimization through viewport filtering",
         "Multi-source government data integration and spatial analysis pipeline",

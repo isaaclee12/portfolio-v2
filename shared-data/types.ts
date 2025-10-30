@@ -34,7 +34,7 @@ export interface PersonalInfo {
   title: string;
   email: string;
   location: string;
-  summary: string;
+  description: string;
 }
 
 export interface PortfolioData {
