@@ -28,16 +28,20 @@ const ProfessionalPortfolio: React.FC = () => {
     // Trigger load animations
     setTimeout(() => setIsLoaded(true), 100);
 
-    // Intersection Observer for active section tracking
+    // Intersection Observer for active section tracking and scroll animations
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
             setActiveSection(entry.target.id);
           }
+          // Add visible class when section enters viewport
+          if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
+            entry.target.classList.add('section-visible');
+          }
         });
       },
-      { threshold: [0.3] }
+      { threshold: [0.2, 0.3] }
     );
 
     sections.forEach(({ ref }) => {
@@ -103,9 +107,9 @@ const ProfessionalPortfolio: React.FC = () => {
             <div className="hero-cta slide-in-left delay-600">
               <button
                 className="cta-button primary"
-                onClick={() => scrollToSection("projects")}
+                onClick={() => scrollToSection("experience")}
               >
-                View My Work
+                View My Experience
               </button>
               <button
                 className="cta-button secondary"
@@ -116,7 +120,7 @@ const ProfessionalPortfolio: React.FC = () => {
             </div>
           </div>
           <div className="hero-image slide-in-right delay-300">
-            <div className="profile-card">
+            <div className="profile-card card-throw">
               <div className="profile-avatar">
                 <img src="/images/isaac.jpg" alt="Isaac Lee" className="avatar-image" />
               </div>
@@ -134,15 +138,15 @@ const ProfessionalPortfolio: React.FC = () => {
           <div className="section-content">
             <h2 className="section-title slide-in-up">About Me</h2>
             <div className="about-grid">
-              <div className="about-text slide-in-left">
-                <p>
+              <div className="about-text">
+                <p className="slide-in-up delay-100">
                   I'm a passionate software engineer with expertise in building
                   scalable web applications and data-driven solutions. My
                   experience spans from AI-powered learning platforms to
                   interactive data visualizations that serve real public
                   utility.
                 </p>
-                <p>
+                <p className="slide-in-up delay-200">
                   I thrive on tackling complex technical challenges, from
                   optimizing performance for thousands of users to processing
                   massive datasets with innovative approaches.
@@ -280,19 +284,44 @@ const ProfessionalPortfolio: React.FC = () => {
             <h2 className="section-title slide-in-up">Technical Skills</h2>
             <div className="skills-container">
               {data.techStack.map((category, index) => {
-                const getTechIcon = (tech) => {
-                  const iconMap = {
-                    'React': '⚛️',
-                    'TypeScript': '🟦',
+                const getTechIcon = (tech: string) => {
+                  const iconMap: { [key: string]: string } = {
+                    // Front End
                     'JavaScript': '🟨',
-                    'HTML': '🧱',
-                    'CSS': '🎨',
+                    'TypeScript': '🟦',
+                    'React': '⚛️',
+                    'Redux': '🔄',
+                    'Jest': '🃏',
+                    // Back End
                     'Node.js': '🟢',
                     'Python': '🐍',
-                    'Express': '🚂',
-                    'Git': '📝',
+                    'Django': '🎸',
+                    'MySQL': '🐬',
+                    'MongoDB': '🍃',
+                    // DevOps & Cloud
+                    'AWS': '☁️',
+                    'RESTful APIs': '🔌',
                     'Docker': '🐳',
-                    'AWS': '☁️'
+                    'Kubernetes': '⚓',
+                    'Kafka': '📡',
+                    'Terraform': '🏗️',
+                    'OAuth': '🔐',
+                    'JWT': '🎫',
+                    // Tools & Platforms
+                    'Git': '📝',
+                    'GitHub Actions': '🤖',
+                    'A/B Testing': '🧪',
+                    'Agile Development': '🔁',
+                    // AI/LLMs
+                    'GenAI': '🤖',
+                    'AI Integrations': '🧠',
+                    'OpenAI': '✨',
+                    'Claude Code': '🎯',
+                    // Monitoring
+                    'Datadog': '🐕',
+                    'New Relic': '📊',
+                    'Splunk': '🔍',
+                    'Snowflake': '❄️'
                   };
                   return iconMap[tech] || '⚙️';
                 };
@@ -323,28 +352,20 @@ const ProfessionalPortfolio: React.FC = () => {
         >
           <div className="section-content">
             <h2 className="section-title slide-in-up">Let's Work Together</h2>
-            <div className="contact-content slide-in-up delay-200">
-              <p className="contact-intro">
+            <div className="contact-content">
+              <p className="contact-intro slide-in-up delay-100">
                 Ready to bring your next project to life? Let's discuss how we
                 can work together.
               </p>
               <div className="contact-info">
-                <div className="contact-item">
+                <div className="contact-item slide-in-up delay-200">
                   <span className="contact-icon">📧</span>
                   <span className="contact-text">{data.personal.email}</span>
                 </div>
-                <div className="contact-item">
+                <div className="contact-item slide-in-up delay-300">
                   <span className="contact-icon">📍</span>
                   <span className="contact-text">{data.personal.location}</span>
                 </div>
-              </div>
-              <div className="contact-cta">
-                <a
-                  href={`mailto:${data.personal.email}`}
-                  className="cta-button primary"
-                >
-                  Send Message
-                </a>
               </div>
             </div>
             <div className="social-links">

@@ -2,7 +2,7 @@
   "personal": {
     "name": "Your Name",
     "title": "Software Engineer",
-    "description": "Software Engineer at 2U. Interested in Impactful Work. Specializing in JavaScript, TypeScript, React, Python, Django, SQL, Git, AWS, and More.",
+    "description": "Software Engineer, Interested in Impactful Work. Specializing in JavaScript, TypeScript, React, Python, Django, SQL, Git, AWS, and More.",
     "email": "isaac.wonha.lee@outlook.com",
     "linkedin": "https://www.linkedin.com/in/isaacleesoftwareengineer",
     "github": "https://github.com/isaaclee12",
@@ -136,16 +136,28 @@
   ],
   "techStack": [
     {
-      "category": "Frontend",
-      "technologies": ["React", "TypeScript", "HTML", "CSS", "JavaScript"]
+      "category": "Front End Technologies",
+      "technologies": ["JavaScript", "TypeScript", "React", "Redux", "Jest"]
     },
     {
-      "category": "Backend",
-      "technologies": ["Node.js", "Python", "Express"]
+      "category": "Back End Technologies",
+      "technologies": ["Node.js", "Python", "Django", "MySQL", "MongoDB"]
     },
     {
-      "category": "Tools & Technologies",
-      "technologies": ["Git", "Docker", "AWS"]
+      "category": "DevOps & Cloud",
+      "technologies": ["AWS", "RESTful APIs", "Docker", "Kubernetes", "Kafka", "Terraform", "OAuth", "JWT"]
+    },
+    {
+      "category": "Tools & Platforms",
+      "technologies": ["Git", "GitHub Actions", "A/B Testing", "Agile Development"]
+    },
+    {
+      "category": "AI/LLMs",
+      "technologies": ["GenAI", "AI Integrations", "OpenAI", "Claude Code"]
+    },
+    {
+      "category": "Monitoring",
+      "technologies": ["Datadog", "New Relic", "Splunk", "Snowflake"]
     }
   ]
 }
