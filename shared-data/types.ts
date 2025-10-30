@@ -33,6 +33,8 @@ export interface PersonalInfo {
   name: string;
   title: string;
   email: string;
+  linkedin: string;
+  github: string;
   location: string;
   description: string;
 }
