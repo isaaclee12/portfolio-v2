@@ -62,7 +62,7 @@ const ProfessionalPortfolio: React.FC = () => {
       <nav className="nav-sidebar">
         <div className="nav-progress">
           {sections.map((section, index) => {
-            const icons = ["🏠", "👤", "💼", "🚀", "🧠", "📧"];
+            const icons = ["🏠", "👋", "💻", "🚀", "🧠", "📧"];
             return (
               <div
                 key={section.id}
