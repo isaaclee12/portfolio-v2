@@ -14,27 +14,29 @@
       "company": "2U",
       "subsidiary_or_department": "edX, Learning & Pedagogy Team",
       "titles_held": ["Software Engineer"],
-      "dates_worked": ["February 2023", "September 2023"],
+      "dates_worked": ["February 2023", "September 2025"],
       "relevant_urls": [
         "https://2u.com/about/mission/",
         "https://www.edx.org/",
         "https://press.edx.org/edx-debuts-two-ai-powered-learning-assistants-built-on-chatgpt"
       ],
       "achievements": [
-        "Pitched, designed, and developed applications increasing headline KPI by 50% through data-driven insights",
-        "Wrangled and analyzed user data to develop AI-powered learning assistant using OpenAI integration",
-        "Collaborated across teams shipping code that scaled applications for thousands of students globally",
-        "Interviewed stakeholders and examined system patterns leading overseas engineering migration project",
-        "Monitored systems and resolved production issues affecting hundreds of users with real-world impact"
+        "Built and deployed an AI learning assistant used by 100k+ students, boosting our core KPI by 50%",
+        "Architected a microservices-based exam proctoring system, handling 50k+ concurrent sessions",
+        "Integrated a cutting edge ID verification service into our monorepo platform, handling 5k+ verifications/day",
+        "Engineered CI/CD build tools and automation, optimizing deployment from 2hrs to 15min for engineers",
+        "Optimized workflows for building complex open source infrastructures, including monorepo management",
+        "Led technical design reviews with product and legal teams to architect GDPR-compliant data pipeline"
       ],
       "technologies": [
-        "Node.js",
         "JavaScript",
+        "TypeScript",
         "React",
+        "Node.js",
         "Python",
-        "PostgreSQL",
-        "OpenAI",
-        "AWS"
+        "Kubernetes",
+        "AWS",
+        "OpenAI"
       ]
     },
     {
@@ -44,11 +46,11 @@
       "dates_worked": ["September 2021", "April 2022"],
       "relevant_urls": ["https://www.uvm.edu/larnermed"],
       "achievements": [
-        "Collaborated with medical professionals to wrangle data for opioid treatment educational software",
-        "Refactored and analyzed legacy code eliminating bugs, improving performance by 200% in 4 weeks",
-        "Designed robust software solution enhancing engagement for hundreds of medical students"
+        "Refactored and optimized legacy code, improving application build and run time by 200% in 6 weeks",
+        "Collaborated with medical professionals to manage data for opioid treatment educational software",
+        "Designed an educational tool to enhance engagement for hundreds of medical students"
       ],
-      "technologies": ["JavaScript", "Node.js", "Articulate 360"]
+      "technologies": ["JavaScript", "Node.js"]
     },
     {
       "company": "University of Vermont",
@@ -57,12 +59,17 @@
       "dates_worked": ["April 2021", "December 2021"],
       "relevant_urls": ["https://www.uvm.edu/cems/mathstat"],
       "achievements": [
-        "Redesigned and revamped department website improving user experience and accessibility",
-        "Coded and tested features examining scalability"
+        "Implemented React component lazy loading reducing initial page load by 40%",
+        "Redesigned and optimized department website improving user experience and accessibility"
       ],
-      "technologies": ["React", "JavaScript", "Python"]
+      "technologies": ["Python", "Django", "JavaScript", "React"]
     }
   ],
+  "education": {
+    "school": "University of Vermont",
+    "degree": "B.S. Computer Science",
+    "dates": ["August 2018", "December 2021"]
+  },
   "coolProjects": [
     {
       "name": "NYC Climate Efficiency Map",
@@ -84,6 +91,23 @@
         "Leaflet",
         "Vite",
         "Tailwind CSS"
+      ]
+    },
+    {
+      "name": "Korean-English Translator",
+      "description": "AI-powered translation tool that bridges the massive grammatical differences between Korean and English by providing cultural context and grammatical breakdowns alongside translations.",
+      "image": "/images/korean-english-translator-demo.png",
+      "highlights": [
+        "Built complete full-stack application in 2 hours using AI-assisted development",
+        "Integrated Claude API for culturally-aware translations with grammatical explanations"
+      ],
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "Python",
+        "Django",
+        "Anthropic API"
       ]
     }
   ],

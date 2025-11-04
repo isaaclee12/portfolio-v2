@@ -39,9 +39,16 @@ export interface PersonalInfo {
   description: string;
 }
 
+export interface Education {
+  school: string;
+  degree: string;
+  dates: string[];
+}
+
 export interface PortfolioData {
   personal: PersonalInfo;
   professionalExperience: ProfessionalExperience[];
+  education?: Education;
   coolProjects: CoolProject[];
   oldProjects: OldProject[];
   techStack: TechStack[];

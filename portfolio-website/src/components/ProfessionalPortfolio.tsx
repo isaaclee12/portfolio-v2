@@ -139,16 +139,19 @@ const ProfessionalPortfolio: React.FC = () => {
             <div className="about-grid">
               <div className="about-text">
                 <p className="slide-in-up delay-100">
-                  I'm a passionate software engineer with expertise in building
-                  scalable web applications and data-driven solutions. My
-                  experience spans from AI-powered learning platforms to
-                  interactive data visualizations that serve real public
-                  utility.
+                  I'm a full-stack software engineer passionate about building technology that drives meaningful impact. Over the past 3+ years, I've thrived as a technical generalist who seamlessly moves between frontend development, backend architecture, DevOps infrastructure, and everything in between to deliver complete solutions that serve millions of users globally.
                 </p>
                 <p className="slide-in-up delay-200">
-                  I thrive on tackling complex technical challenges, from
-                  optimizing performance for thousands of users to processing
-                  massive datasets with innovative approaches.
+                  In my professional roles, I've acquired expertise in TypeScript, React, Node.js, Python, and Django, plus DevOps expertise in AWS, Docker, and Kafka. I've led performance optimizations that improved system speeds by 200%, implemented compliance-focused features (GDPR, accessibility), and architected AI-powered applications from concept to production.
+                </p>
+                <p className="slide-in-up delay-300">
+                  I find I'm driven to work hard when collaborating with like-minded people on cross-functional teams to solve complex technical challenges in domains that make life better. I thrive in environments where technical excellence meets social impact, working alongside kind, mission-driven colleagues who care about the work we're building together.
+                </p>
+                <p className="slide-in-up delay-400">
+                  Whether I'm diving deep into a single component or architecting across an entire system, I adapt quickly to what each project needs. I'm equally comfortable contributing to a focused sprint or leading cross-functional initiatives. I switch contexts and projects as readily as I switch between the terminal and the browser.
+                </p>
+                <p className="slide-in-up delay-500">
+                  I believe the best software comes from truly understanding the people it serves. Whether working with medical professionals on patient treatment software or collaborating with product teams on globalized and accessible learner experiences, I bring curiosity, clear communication, and a commitment to building solutions that make a real difference.
                 </p>
               </div>
             </div>
@@ -208,6 +211,20 @@ const ProfessionalPortfolio: React.FC = () => {
                   </div>
                 </div>
               ))}
+
+              {/* Education Timeline End */}
+              {data.education && (
+                <div className="timeline-end">
+                  <div className="education-card slide-in-up delay-600">
+                    <div className="education-icon">🎓</div>
+                    <h3 className="education-school">{data.education.school}</h3>
+                    <div className="education-degree">{data.education.degree}</div>
+                    <div className="education-dates">
+                      {data.education.dates[0]} - {data.education.dates[1]}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -229,13 +246,16 @@ const ProfessionalPortfolio: React.FC = () => {
                   }`}
                 >
                   <div className="project-image">
-                    <img
-                      src={project.image}
-                      alt="A screenshot of Isaac Lee's New York City Climate Efficiency Map project"
-                    ></img>
-                    <div className="image-placeholder">
-                      <span>🌟</span>
-                    </div>
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={`A screenshot of Isaac Lee's ${project.name} project`}
+                      />
+                    ) : (
+                      <div className="image-placeholder">
+                        <span>🌟</span>
+                      </div>
+                    )}
                     <div className="project-overlay">
                       {project.live_url && (
                         <a
